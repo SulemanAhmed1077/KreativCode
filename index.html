@@ -1,584 +1,739 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KreativCode | Full Service Digital Agency</title>
-  
-  <!-- External Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Waleed | Gourmet Food Brand Designer</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --card-bg: #1c1c1e;
+            --primary-accent: #D94F04; /* Rich Food Orange/Red */
+            --gold-accent: #E0A96D;    /* Warm Amber Gold */
+            --text-light: #F5F5F7;
+            --text-dim: #A1A1A6;
+            
+            /* Modern Dark 3D Shadows */
+            --shadow-out: 8px 8px 18px #0a0a0a, -8px -8px 18px #26262a;
+            --shadow-in: inset 6px 6px 12px #0a0a0a, inset -6px -6px 12px #26262a;
+            --shadow-gold-glow: 0px 10px 25px rgba(224, 169, 109, 0.25);
+            --shadow-orange-glow: 0px 10px 25px rgba(217, 79, 4, 0.35);
+        }
 
-  <style>
-    /* --- Variables & Cyber Dark Theme --- */
-    :root {
-      --bg-black: #030508;
-      --bg-card: rgba(18, 24, 38, 0.65);
-      --primary-glow: #7c3aed;
-      --secondary-glow: #06b6d4;
-      --text-white: #f8fafc;
-      --text-muted: #94a3b8;
-      --border-glass: rgba(255, 255, 255, 0.08);
-      --border-active: rgba(124, 58, 237, 0.5);
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    html { scroll-behavior: smooth; }
-    body { background-color: var(--bg-black); color: var(--text-white); overflow-x: hidden; line-height: 1.6; position: relative; }
-    a { text-decoration: none; color: inherit; }
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-black); }
-    ::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.5); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--secondary-glow); }
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background-color: var(--bg-dark);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    /* Glow Cursor Effect */
-    .cursor-glow {
-      position: fixed; width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
-      pointer-events: none; transform: translate(-50%, -50%); z-index: 9999;
-      transition: transform 0.08s ease; display: none;
-    }
-    @media (min-width: 992px) { .cursor-glow { display: block; } }
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
 
-    .hero-glow {
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 500px;
-      background: radial-gradient(circle, rgba(124, 58, 237, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, transparent 70%);
-      filter: blur(100px); z-index: 0; pointer-events: none;
-    }
+        .logo span {
+            color: var(--primary-accent);
+        }
 
-    /* Navbar */
-    .navbar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 20px 8%; background: rgba(3, 5, 8, 0.85); backdrop-filter: blur(15px);
-      position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-glass);
-    }
-    .logo { font-size: 1.6rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
-    .accent { color: var(--secondary-glow); }
-    .nav-links { display: flex; list-style: none; gap: 30px; }
-    .nav-links a { font-weight: 600; font-size: 0.95rem; color: var(--text-muted); transition: 0.3s; }
-    .nav-links a:hover { color: var(--text-white); text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
-    .nav-btn {
-      background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); color: white;
-      padding: 10px 24px; border-radius: 30px; font-weight: 700; transition: 0.3s;
-    }
-    .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(6, 182, 212, 0.6); }
-    .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-white); }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
 
-    /* Common Section Styles */
-    section { padding: 100px 8%; position: relative; z-index: 1; }
-    .section-tag { color: var(--secondary-glow); font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; text-align: center; margin-bottom: 10px; text-transform: uppercase; }
-    .section-title { font-size: 2.8rem; text-align: center; margin-bottom: 40px; font-weight: 800; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dim);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
 
-    /* Buttons */
-    .btn { padding: 14px 32px; border-radius: 30px; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; border: none; cursor: pointer; }
-    .btn-glow { background: linear-gradient(135deg, var(--primary-glow), #6366f1); color: white; box-shadow: 0 0 25px rgba(124, 58, 237, 0.4); }
-    .btn-glow:hover { transform: translateY(-3px); box-shadow: 0 0 35px rgba(124, 58, 237, 0.7); }
-    .btn-glass { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid var(--border-glass); }
-    .btn-glass:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--text-white); }
+        .nav-links a:hover {
+            color: var(--gold-accent);
+        }
 
-    /* Hero Section */
-    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 150px; }
-    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(124, 58, 237, 0.15); border: 1px solid rgba(124, 58, 237, 0.3); padding: 6px 16px; border-radius: 30px; font-size: 0.85rem; color: #a78bfa; margin-bottom: 25px; }
-    .badge-dot { width: 8px; height: 8px; background: var(--secondary-glow); border-radius: 50%; box-shadow: 0 0 8px var(--secondary-glow); }
-    .hero h1 { font-size: 4rem; font-weight: 800; line-height: 1.15; max-width: 900px; margin-bottom: 20px; }
-    .text-gradient { background: linear-gradient(135deg, #a78bfa, var(--secondary-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 680px; margin-bottom: 40px; }
-    .hero-actions { display: flex; gap: 20px; margin-bottom: 50px; }
+        /* 3D Buttons */
+        .btn-3d {
+            padding: 14px 32px;
+            border-radius: 50px;
+            border: none;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-out);
+            color: var(--gold-accent);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+            text-align: center;
+        }
 
-    /* Stats Bar */
-    .stats-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; width: 100%; max-width: 900px; text-align: center; }
-    .stat-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 25px 20px; border-radius: 20px; backdrop-filter: blur(10px); }
-    .stat-card h3 { font-size: 2.2rem; color: var(--secondary-glow); font-weight: 800; }
-    .stat-card p { color: var(--text-muted); font-size: 0.85rem; }
+        .btn-3d:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-gold-glow);
+            color: #fff;
+        }
 
-    /* Portfolio Category Tabs */
-    .tab-navigation { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-    .tab-btn { background: var(--bg-card); border: 1px solid var(--border-glass); color: var(--text-muted); padding: 12px 28px; border-radius: 30px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; }
-    .tab-btn.active, .tab-btn:hover { background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); color: white; border-color: transparent; box-shadow: 0 0 20px rgba(124, 58, 237, 0.4); }
+        .btn-primary {
+            background: var(--primary-accent);
+            color: #fff;
+            box-shadow: var(--shadow-orange-glow);
+        }
 
-    /* Portfolio Grid */
-    .portfolio-grid { display: none; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; animation: fadeIn 0.5s ease-in-out forwards; }
-    .portfolio-grid.active { display: grid; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .btn-primary:hover {
+            background: #f05a05;
+            box-shadow: 0px 12px 30px rgba(217, 79, 4, 0.5);
+        }
 
-    .portfolio-card { background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-glass); transition: all 0.4s ease; position: relative; height: 260px; cursor: pointer; }
-    .portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-    .portfolio-card:hover { transform: translateY(-8px); border-color: var(--secondary-glow); box-shadow: 0 10px 30px rgba(6, 182, 212, 0.25); }
-    .portfolio-card:hover img { transform: scale(1.08); }
-    .portfolio-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px 20px; background: linear-gradient(to top, rgba(3, 5, 8, 0.95), transparent); display: flex; justify-content: space-between; align-items: center; }
-    .portfolio-overlay span { font-size: 0.85rem; font-weight: 700; color: var(--secondary-glow); }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold-accent);
+            color: var(--gold-accent);
+            box-shadow: none;
+        }
 
-    /* Lightbox Modal */
-    .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 5, 8, 0.92); backdrop-filter: blur(15px); z-index: 2000; display: none; justify-content: center; align-items: center; padding: 20px; }
-    .lightbox.active { display: flex; }
-    .lightbox-content { max-width: 90%; max-height: 85vh; border-radius: 16px; box-shadow: 0 0 40px rgba(124, 58, 237, 0.5); border: 1px solid var(--border-glass); object-fit: contain; }
-    .lightbox-close { position: absolute; top: 25px; right: 35px; font-size: 2.5rem; color: white; cursor: pointer; transition: 0.3s; }
-    .lightbox-close:hover { color: var(--secondary-glow); }
+        .btn-outline:hover {
+            background: var(--gold-accent);
+            color: #121212;
+            box-shadow: var(--shadow-gold-glow);
+        }
 
-    /* Services Section */
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-    .service-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 40px 30px; border-radius: 20px; backdrop-filter: blur(10px); transition: 0.3s ease; }
-    .service-card:hover { border-color: var(--border-active); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15); }
-    .card-icon { width: 60px; height: 60px; background: rgba(124, 58, 237, 0.1); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--secondary-glow); margin-bottom: 20px; }
+        /* Shared Section Styles */
+        .section {
+            padding: 80px 8%;
+        }
 
-    /* Process Section */
-    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-    .process-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 30px 20px; border-radius: 20px; position: relative; backdrop-filter: blur(10px); }
-    .process-num { font-size: 3rem; font-weight: 800; color: rgba(255, 255, 255, 0.05); position: absolute; top: 10px; right: 20px; }
+        .section-tag {
+            text-align: center;
+            color: var(--primary-accent);
+            font-weight: 700;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
 
-    /* Testimonials Section */
-    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-    .review-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 30px; border-radius: 20px; position: relative; backdrop-filter: blur(10px); }
-    .stars { color: #f59e0b; margin-bottom: 15px; }
-    .client-info { display: flex; align-items: center; gap: 15px; margin-top: 20px; }
-    .client-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; }
+        .section-title {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--gold-accent);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
 
-    /* Pricing Section */
-    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-    .pricing-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 40px 30px; border-radius: 24px; text-align: center; position: relative; backdrop-filter: blur(10px); }
-    .pricing-card.popular { border-color: var(--secondary-glow); box-shadow: 0 0 30px rgba(6, 182, 212, 0.2); }
-    .popular-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--secondary-glow); color: black; font-weight: 800; font-size: 0.75rem; padding: 4px 15px; border-radius: 20px; }
-    .price { font-size: 3rem; font-weight: 800; margin: 20px 0; }
+        .section-desc {
+            text-align: center;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            font-size: 1.05rem;
+        }
 
-    /* FAQ Section */
-    .faq-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
-    .faq-item { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 12px; overflow: hidden; backdrop-filter: blur(10px); }
-    .faq-question { padding: 20px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
-    .faq-question:hover { color: var(--secondary-glow); }
-    .faq-answer { padding: 0 20px 20px; color: var(--text-muted); display: none; font-size: 0.95rem; }
-    .faq-item.active .faq-answer { display: block; }
-    .faq-item.active .faq-question i { transform: rotate(180deg); color: var(--secondary-glow); }
+        /* Hero Section */
+        .hero {
+            padding: 100px 8% 60px;
+            text-align: center;
+        }
 
-    /* CTA Section */
-    .cta-banner { background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(6, 182, 212, 0.2)); border: 1px solid var(--border-glass); padding: 60px 40px; border-radius: 30px; text-align: center; margin-bottom: 20px; backdrop-filter: blur(10px); }
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.2rem;
+            color: var(--text-light);
+            max-width: 900px;
+            margin: 0 auto 20px;
+            line-height: 1.2;
+        }
 
-    /* Contact Section */
-    .contact-container { display: flex; flex-wrap: wrap; gap: 50px; background: var(--bg-card); padding: 50px; border-radius: 30px; border: 1px solid var(--border-glass); backdrop-filter: blur(10px); }
-    .contact-info { flex: 1; min-width: 300px; }
-    .contact-info h2 { font-size: 2.5rem; margin: 15px 0; }
-    .contact-details { display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
-    .detail-item { display: flex; align-items: center; gap: 15px; color: var(--text-muted); }
-    .detail-item i { width: 45px; height: 45px; background: rgba(124, 58, 237, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--secondary-glow); font-size: 1.1rem; }
-    .contact-form { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 20px; }
-    .contact-form input, .contact-form textarea { width: 100%; padding: 15px 20px; background: rgba(3, 5, 8, 0.6); border: 1px solid var(--border-glass); border-radius: 12px; color: white; outline: none; transition: 0.3s; }
-    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--secondary-glow); box-shadow: 0 0 15px rgba(6, 182, 212, 0.2); }
+        .hero h1 span {
+            color: var(--gold-accent);
+        }
 
-    /* Footer */
-    footer { background: #020305; padding: 60px 8% 30px; border-top: 1px solid var(--border-glass); }
-    .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 40px; }
-    .footer-col h4 { font-size: 1.1rem; margin-bottom: 20px; color: var(--secondary-glow); }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul li a { color: var(--text-muted); transition: 0.3s; }
-    .footer-col ul li a:hover { color: white; }
-    .social-links { display: flex; gap: 15px; margin-top: 15px; }
-    .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; border: 1px solid var(--border-glass); }
-    .social-links a:hover { background: var(--secondary-glow); color: black; border-color: var(--secondary-glow); }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
 
-    @media (max-width: 768px) {
-      .hamburger { display: block; }
-      .nav-links { position: fixed; top: 70px; right: -100%; width: 100%; height: 100vh; background: var(--bg-black); flex-direction: column; align-items: center; padding-top: 50px; transition: 0.4s ease; }
-      .nav-links.active { right: 0; }
-      .hero h1 { font-size: 2.5rem; }
-      .hero-actions { flex-direction: column; width: 100%; }
-      .btn { width: 100%; justify-content: center; }
-      .contact-container { padding: 30px 20px; }
-    }
-  </style>
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 8% 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            padding: 50px;
+            border-radius: 25px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-out);
+            border: 1px solid rgba(224, 169, 109, 0.1);
+            text-align: center;
+        }
+
+        .about-card h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.3rem;
+            color: var(--gold-accent);
+            margin-bottom: 20px;
+        }
+
+        .about-card p {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Stats Counter */
+        .stats-container {
+            padding: 40px 8% 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stats-box {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px;
+            border-radius: 20px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-out);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.8rem;
+            color: var(--primary-accent);
+        }
+
+        .stat-item p {
+            font-weight: 600;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 35px;
+        }
+
+        .card-3d {
+            padding: 35px 25px;
+            border-radius: 20px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-out);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .card-3d:hover {
+            transform: translateY(-5px);
+            border-color: rgba(217, 79, 4, 0.4);
+        }
+
+        .card-check {
+            font-size: 1.5rem;
+            color: var(--primary-accent);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .card-3d h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+
+        .card-3d p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Packages Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            padding: 50px 40px;
+            border-radius: 20px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-out);
+            border: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .price-card-popular {
+            border: 2px solid var(--primary-accent);
+            position: relative;
+            box-shadow: var(--shadow-orange-glow);
+        }
+
+        .price-tag {
+            color: var(--gold-accent);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .price-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .price-features {
+            list-style: none;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            flex-grow: 1;
+        }
+
+        .price-features li {
+            margin-bottom: 12px;
+        }
+
+        .price-features li::before {
+            content: "•";
+            color: var(--gold-accent);
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        /* ARROW-CONTROLLED PORTFOLIO SLIDER & GRID */
+        .portfolio-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-scroll-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 10px;
+            scrollbar-width: none; /* Firefox hidden scrollbar */
+        }
+
+        .portfolio-scroll-container::-webkit-scrollbar {
+            display: none; /* Chrome/Safari hidden scrollbar */
+        }
+
+        .portfolio-thumb {
+            min-width: 180px;
+            height: 130px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-out);
+            border: 1px solid rgba(224, 169, 109, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .portfolio-thumb:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-accent);
+            box-shadow: var(--shadow-orange-glow);
+        }
+
+        .portfolio-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Nav Arrow Buttons */
+        .arrow-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--gold-accent);
+            color: var(--gold-accent);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: var(--shadow-out);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+        }
+
+        .arrow-btn:hover {
+            background: var(--primary-accent);
+            color: #fff;
+            border-color: var(--primary-accent);
+            box-shadow: var(--shadow-orange-glow);
+        }
+
+        .arrow-btn.left { left: -25px; }
+        .arrow-btn.right { right: -25px; }
+
+        /* LIGHTBOX POPUP */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .lightbox-content {
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(217, 79, 4, 0.5);
+            border: 2px solid var(--gold-accent);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary-accent);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 8%;
+            text-align: center;
+        }
+
+        .contact-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            border-radius: 25px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-out);
+            border: 1px solid rgba(217, 79, 4, 0.2);
+        }
+
+        .contact h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        /* Footer & Credits */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            background-color: var(--bg-dark);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .developer-credit {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .developer-credit a {
+            color: var(--gold-accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .developer-credit a:hover {
+            color: var(--primary-accent);
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+            .stats-box { flex-direction: column; gap: 30px; }
+            .nav-links { display: none; }
+            .arrow-btn.left { left: -10px; }
+            .arrow-btn.right { right: -10px; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Glow Cursor Background Element -->
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <div class="hero-glow"></div>
-
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo"><i class="fa-solid fa-code logo-icon"></i> Kreativ<span class="accent">Code</span></div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <a href="#contact" class="nav-btn">Start Project</a>
-    <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="badge"><span class="badge-dot"></span> Next-Gen Digital Agency</div>
-    <h1>Build Your <span class="text-gradient">Digital Empire</span> With Us</h1>
-    <p>We combine high-speed Web Development, captivating Graphic Design, and ROI-driven Digital Marketing to scale your business.</p>
-    
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-glow">Book a Call <i class="fa-solid fa-arrow-right"></i></a>
-      <a href="#portfolio" class="btn btn-glass">Explore Work</a>
-    </div>
-
-    <!-- Agency Statistics -->
-    <div class="stats-container">
-      <div class="stat-card"><h3>150+</h3><p>Projects Completed</p></div>
-      <div class="stat-card"><h3>98%</h3><p>Client Satisfaction</p></div>
-      <div class="stat-card"><h3>5+</h3><p>Years Experience</p></div>
-      <div class="stat-card"><h3>24/7</h3><p>Dedicated Support</p></div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO SECTION -->
-  <section id="portfolio">
-    <div class="section-tag">OUR SHOWCASE</div>
-    <h2 class="section-title">Featured Agency Portfolio</h2>
-
-    <!-- Category Tabs -->
-    <div class="tab-navigation">
-      <button class="tab-btn active" onclick="switchTab('web')"><i class="fa-solid fa-code"></i> Web Development (WD1 - WD9)</button>
-      <button class="tab-btn" onclick="switchTab('graphic')"><i class="fa-solid fa-palette"></i> Graphic Designs (GD1 - GD13)</button>
-    </div>
-
-    <!-- WEB DEVELOPMENT GRID (WD1 to WD9 .png) -->
-    <div class="portfolio-grid active" id="web-grid">
-      <div class="portfolio-card" onclick="openLightbox('WD1.png')"><img src="WD1.png" alt="Web Dev 1" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600'"><div class="portfolio-overlay"><span>Web Project #01</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('WD2.png')"><img src="WD2.png" alt="Web Dev 2" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600'"><div class="portfolio-overlay"><span>Web Project #02</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('WD3.png')"><img src="WD3.png" alt="Web Dev 3" onerror="this.src='https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=600'"><div class="portfolio-overlay"><span>Web Project #03</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('WD4.png')"><img src="WD4.png" alt="Web Dev 4" onerror="this.src='https://images.unsplash.com/photo-1547658719-da2b51169166?w=600'"><div class="portfolio-overlay"><span>Web Project #04</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('WD5.png')"><img src="WD5.png" alt="Web Dev 5" onerror="this.src='https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=600'"><div class="portfolio-overlay"><span>Web Project #05</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('WD6.png')"><img src="WD6.png" alt="Web Dev 6" onerror="this.src='https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600'"><div class="portfolio-overlay"><span>Web Project #06</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('WD7.png')"><img src="WD7.png" alt="Web Dev 7" onerror="this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600'"><div class="portfolio-overlay"><span>Web Project #07</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('WD8.png')"><img src="WD8.png" alt="Web Dev 8" onerror="this.src='https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=600'"><div class="portfolio-overlay"><span>Web Project #08</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('WD9.png')"><img src="WD9.png" alt="Web Dev 9" onerror="this.src='https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600'"><div class="portfolio-overlay"><span>Web Project #09</span><i class="fa-solid fa-expand"></i></div></div>
-    </div>
-
-    <!-- GRAPHIC DESIGN GRID (GD1 to GD13 .jpeg) -->
-    <div class="portfolio-grid" id="graphic-grid">
-      <div class="portfolio-card" onclick="openLightbox('GD1.jpeg')"><img src="GD1.jpeg" alt="Design 1" onerror="this.src='https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500'"><div class="portfolio-overlay"><span>Graphic Design #01</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD2.jpeg')"><img src="GD2.jpeg" alt="Design 2" onerror="this.src='https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=500'"><div class="portfolio-overlay"><span>Graphic Design #02</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD3.jpeg')"><img src="GD3.jpeg" alt="Design 3" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500'"><div class="portfolio-overlay"><span>Graphic Design #03</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD4.jpeg')"><img src="GD4.jpeg" alt="Design 4" onerror="this.src='https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=500'"><div class="portfolio-overlay"><span>Graphic Design #04</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD5.jpeg')"><img src="GD5.jpeg" alt="Design 5" onerror="this.src='https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500'"><div class="portfolio-overlay"><span>Graphic Design #05</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD6.jpeg')"><img src="GD6.jpeg" alt="Design 6" onerror="this.src='https://images.unsplash.com/photo-1542744094-3a31b272c490?w=500'"><div class="portfolio-overlay"><span>Graphic Design #06</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD7.jpeg')"><img src="GD7.jpeg" alt="Design 7" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500'"><div class="portfolio-overlay"><span>Graphic Design #07</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD8.jpeg')"><img src="GD8.jpeg" alt="Design 8" onerror="this.src='https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=500'"><div class="portfolio-overlay"><span>Graphic Design #08</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD9.jpeg')"><img src="GD9.jpeg" alt="Design 9" onerror="this.src='https://images.unsplash.com/photo-1558655146-d09347e92766?w=500'"><div class="portfolio-overlay"><span>Graphic Design #09</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD10.jpeg')"><img src="GD10.jpeg" alt="Design 10" onerror="this.src='https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=500'"><div class="portfolio-overlay"><span>Graphic Design #10</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD11.jpeg')"><img src="GD11.jpeg" alt="Design 11" onerror="this.src='https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?w=500'"><div class="portfolio-overlay"><span>Graphic Design #11</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD12.jpeg')"><img src="GD12.jpeg" alt="Design 12" onerror="this.src='https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=500'"><div class="portfolio-overlay"><span>Graphic Design #12</span><i class="fa-solid fa-expand"></i></div></div>
-      <div class="portfolio-card" onclick="openLightbox('GD13.jpeg')"><img src="GD13.jpeg" alt="Design 13" onerror="this.src='https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=500'"><div class="portfolio-overlay"><span>Graphic Design #13</span><i class="fa-solid fa-expand"></i></div></div>
-    </div>
-  </section>
-
-  <!-- Lightbox Modal -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close">&times;</span>
-    <img class="lightbox-content" id="lightboxImg" src="" alt="Portfolio Large Preview">
-  </div>
-
-  <!-- Services Section -->
-  <section class="services" id="services">
-    <div class="section-tag">OUR SERVICES</div>
-    <h2 class="section-title">What We Offer</h2>
-
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="card-icon"><i class="fa-solid fa-code"></i></div>
-        <h3>Web Development</h3>
-        <p>Ultra-fast Next.js, React & Custom Web Apps built for high conversion and speed.</p>
-      </div>
-
-      <div class="service-card">
-        <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <h3>Graphic Design</h3>
-        <p>Visually stunning brand identities, logos, and modern UI/UX design layouts.</p>
-      </div>
-
-      <div class="service-card">
-        <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
-        <h3>Digital Marketing</h3>
-        <p>Data-driven SEO, Google & Meta ads strategies to scale your sales rapidly.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORK PROCESS SECTION -->
-  <section>
-    <div class="section-tag">HOW WE WORK</div>
-    <h2 class="section-title">Our Simple 4-Step Process</h2>
-
-    <div class="process-grid">
-      <div class="process-card">
-        <span class="process-num">01</span>
-        <h4 style="color: var(--secondary-glow); margin-bottom: 10px;">Discovery Call</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">We analyze your brand goals and understand target audience needs.</p>
-      </div>
-      <div class="process-card">
-        <span class="process-num">02</span>
-        <h4 style="color: var(--secondary-glow); margin-bottom: 10px;">Strategic Blueprint</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Designing wireframes, choosing tech stacks, and planning workflows.</p>
-      </div>
-      <div class="process-card">
-        <span class="process-num">03</span>
-        <h4 style="color: var(--secondary-glow); margin-bottom: 10px;">Design & Code</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Transforming concepts into high-converting digital products.</p>
-      </div>
-      <div class="process-card">
-        <span class="process-num">04</span>
-        <h4 style="color: var(--secondary-glow); margin-bottom: 10px;">Launch & Scale</h4>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Testing performance, final deployment, and continuous optimization.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS / REVIEWS SECTION -->
-  <section id="reviews">
-    <div class="section-tag">TESTIMONIALS</div>
-    <h2 class="section-title">What Our Clients Say</h2>
-
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p style="color: var(--text-muted); font-style: italic;">"KreativCode rebuilt our web application with unbelievable speed and design perfection. Our online sales jumped by 40% in just two months!"</p>
-        <div class="client-info">
-          <div class="client-avatar">AH</div>
-          <div>
-            <h4 style="font-size: 0.95rem;">Alex Harrison</h4>
-            <span style="font-size: 0.8rem; color: var(--text-muted);">Founder, TechPulse</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p style="color: var(--text-muted); font-style: italic;">"Their graphic designs and social banners completely elevated our brand image. Very professional and super quick turnarounds!"</p>
-        <div class="client-info">
-          <div class="client-avatar">SK</div>
-          <div>
-            <h4 style="font-size: 0.95rem;">Sarah Khan</h4>
-            <span style="font-size: 0.8rem; color: var(--text-muted);">Marketing Director, Lumina Studio</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="review-card">
-        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-        <p style="color: var(--text-muted); font-style: italic;">"The best agency we have worked with so far. From communication to technical execution, everything was 10/10."</p>
-        <div class="client-info">
-          <div class="client-avatar">RM</div>
-          <div>
-            <h4 style="font-size: 0.95rem;">Rahul Mehta</h4>
-            <span style="font-size: 0.8rem; color: var(--text-muted);">CEO, Apex Ventures</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING SECTION -->
-  <section id="pricing">
-    <div class="section-tag">PRICING PLANS</div>
-    <h2 class="section-title">Flexible Investment Packages</h2>
-
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3>Starter</h3>
-        <p style="color: var(--text-muted);">Perfect for small businesses</p>
-        <div class="price">$299</div>
-        <ul style="list-style: none; text-align: left; margin-bottom: 30px; display: flex; flex-direction: column; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Single Page Website</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Basic Graphic Branding</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Mobile Responsive</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Standard Delivery</li>
+    <!-- Header Navigation -->
+    <nav>
+        <div class="logo">Muhammad <span>Waleed</span></div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#packages">Packages</a></li>
+            <li><a href="#portfolio">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
-        <a href="#contact" class="btn btn-glass" style="width: 100%; justify-content: center;">Choose Plan</a>
-      </div>
+        <a href="#contact" class="btn-3d btn-primary">Hire Me</a>
+    </nav>
 
-      <div class="pricing-card popular">
-        <div class="popular-badge">MOST POPULAR</div>
-        <h3>Professional</h3>
-        <p style="color: var(--text-muted);">For growing brands & startups</p>
-        <div class="price">$699</div>
-        <ul style="list-style: none; text-align: left; margin-bottom: 30px; display: flex; flex-direction: column; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Multi-page Custom Website</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Complete UI/UX + Graphic Kit</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> SEO Optimization</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Priority 24/7 Support</li>
-        </ul>
-        <a href="#contact" class="btn btn-glow" style="width: 100%; justify-content: center;">Get Started</a>
-      </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Transforming Food Brands with <span>Mouth-Watering</span> Design 🍔🎨</h1>
+        <p>I turn hungry viewers into loyal customers through high-impact visual branding for restaurants, cafes, and food businesses.</p>
+        <div class="hero-btns">
+            <a href="#portfolio" class="btn-3d btn-primary">View My Work</a>
+            <a href="#contact" class="btn-3d">Let's Talk</a>
+        </div>
+    </section>
 
-      <div class="pricing-card">
-        <h3>Enterprise</h3>
-        <p style="color: var(--text-muted);">Custom enterprise solutions</p>
-        <div class="price">$1499</div>
-        <ul style="list-style: none; text-align: left; margin-bottom: 30px; display: flex; flex-direction: column; gap: 10px; color: var(--text-muted); font-size: 0.9rem;">
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Full E-Commerce / Custom App</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Unlimited Graphic Assets</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Digital Marketing Setup</li>
-          <li><i class="fa-solid fa-check" style="color: var(--secondary-glow);"></i> Dedicated Manager</li>
-        </ul>
-        <a href="#contact" class="btn btn-glass" style="width: 100%; justify-content: center;">Contact Us</a>
-      </div>
-    </div>
-  </section>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-card">
+            <h2>Design That Triggers Cravings</h2>
+            <p>
+                Hi! I’m <strong>Muhammad Waleed</strong> — a specialized Graphic Designer with <strong>1.5+ years of experience</strong> crafting high-converting visual identities for the food and restaurant industry. Having delivered <strong>50+ successful projects</strong>, I combine aesthetics with consumer psychology to help food businesses stand out and grow.
+            </p>
+        </div>
+    </section>
 
-  <!-- FAQ SECTION -->
-  <section id="faq">
-    <div class="section-tag">GOT QUESTIONS?</div>
-    <h2 class="section-title">Frequently Asked Questions</h2>
+    <!-- Stats Section -->
+    <section class="stats-container">
+        <div class="stats-box">
+            <div class="stat-item">
+                <h2>1.5+</h2>
+                <p>Years Experience</p>
+            </div>
+            <div class="stat-item">
+                <h2>50+</h2>
+                <p>Projects Completed</p>
+            </div>
+            <div class="stat-item">
+                <h2>100%</h2>
+                <p>Client Satisfaction</p>
+            </div>
+        </div>
+    </section>
 
-    <div class="faq-container">
-      <div class="faq-item">
-        <div class="faq-question">How long does a website project take? <i class="fa-solid fa-chevron-down"></i></div>
-        <div class="faq-answer">Most custom website projects take between 1 to 3 weeks depending on the complexity and content requirements.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Do you provide custom graphic design source files? <i class="fa-solid fa-chevron-down"></i></div>
-        <div class="faq-answer">Yes! We provide complete editable source files (Figma, Photoshop, Illustrator, PNG, JPEG) upon completion.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question">Will my website be mobile-friendly? <i class="fa-solid fa-chevron-down"></i></div>
-        <div class="faq-answer">100% yes. All our websites are ultra-fast, responsive, and optimized for mobile, tablet, and desktop screens.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BANNER -->
-  <section>
-    <div class="cta-banner">
-      <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Have a Project in Mind?</h2>
-      <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 30px;">Let’s turn your ideas into a high-converting digital product. Contact us today for a free consultation.</p>
-      <a href="#contact" class="btn btn-glow">Start a Conversation <i class="fa-solid fa-paper-plane"></i></a>
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section class="contact" id="contact">
-    <div class="contact-container">
-      <div class="contact-info">
-        <div class="section-tag" style="text-align: left;">CONTACT US</div>
-        <h2>Let's Build Something Great Together</h2>
-        <p>Send us your project details and we will reach out within 24 hours.</p>
+    <!-- What I Do Best Section -->
+    <section id="services" class="section">
+        <div class="section-tag">WHAT I DO BEST</div>
+        <h2 class="section-title">Crafting Visual Identities for Restaurants & Food Businesses</h2>
+        <p class="section-desc">I help restaurants, cafés, and food brands stand out with appetizing visual designs that attract customers and increase sales.</p>
         
-        <div class="contact-details">
-          <div class="detail-item"><i class="fa-solid fa-envelope"></i><span>contact@kreativcode.com</span></div>
-          <div class="detail-item"><i class="fa-solid fa-phone"></i><span>+1 (555) 019-2834</span></div>
-          <div class="detail-item"><i class="fa-solid fa-location-dot"></i><span>San Francisco, CA & Global</span></div>
+        <div class="services-grid">
+            <div class="card-3d">
+                <div class="card-check">✓</div>
+                <h3>Strategic Menu Psychology & Layouts</h3>
+                <p>High-converting menu layouts engineered to highlight your highest-margin dishes and boost sales.</p>
+            </div>
+            <div class="card-3d">
+                <div class="card-check">✓</div>
+                <h3>Appetizing Logo & Brand Identity</h3>
+                <p>Mouth-watering logos, brand guidelines, and color palettes designed specifically for culinary appeal.</p>
+            </div>
+            <div class="card-3d">
+                <div class="card-check">✓</div>
+                <h3>Engaging Social Media Visuals</h3>
+                <p>High-quality grid mockups, banners, and templates designed to drive engagement and foodie traffic.</p>
+            </div>
+            <div class="card-3d">
+                <div class="card-check">✓</div>
+                <h3>Fast Delivery & Unlimited Revisions</h3>
+                <p>Prompt communication, swift turnarounds, and 100% satisfaction guarantee for your brand's perfection.</p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Message Sent Successfully!'); this.reset();">
-        <input type="text" placeholder="Your Full Name" required>
-        <input type="email" placeholder="Your Email Address" required>
-        <textarea rows="4" placeholder="Tell us about your project..." required></textarea>
-        <button type="submit" class="btn btn-glow" style="width: 100%; justify-content: center;">Send Message <i class="fa-solid fa-paper-plane"></i></button>
-      </form>
-    </div>
-  </section>
+    <!-- Packages Section -->
+    <section id="packages" class="section">
+        <div class="section-tag">DESIGN SERVICES</div>
+        <h2 class="section-title">Flexible Packages for Brands<br>with Bigger Appetites</h2>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-col" style="max-width: 300px;">
-        <div class="logo" style="margin-bottom: 15px;"><i class="fa-solid fa-code accent"></i> Kreativ<span class="accent">Code</span></div>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">Building high-performance websites, graphics, and digital strategies for modern brands worldwide.</p>
-        <div class="social-links">
-          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#"><i class="fa-brands fa-twitter"></i></a>
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        <div class="pricing-grid">
+            <!-- Package 1 -->
+            <div class="price-card">
+                <div>
+                    <div class="price-tag">START FOR ONE MONTH</div>
+                    <h3>Trial Starter Package</h3>
+                    <ul class="price-features">
+                        <li>10 Social Media Posts Design</li>
+                        <li>1 Mini Menu Redesign</li>
+                        <li>1 Month Trial Support</li>
+                    </ul>
+                </div>
+                <a href="#contact" class="btn-3d btn-primary">Get Started</a>
+            </div>
+
+            <!-- Package 2 (Most Popular) -->
+            <div class="price-card price-card-popular">
+                <div>
+                    <div class="price-tag">MOST POPULAR</div>
+                    <h3>Brand Identity Package</h3>
+                    <ul class="price-features">
+                        <li>Complete Food Logo Design</li>
+                        <li>Brand Color Palette & Typography</li>
+                        <li>Business Card & Stationery Design</li>
+                    </ul>
+                </div>
+                <a href="#contact" class="btn-3d btn-primary">Choose Plan</a>
+            </div>
+
+            <!-- Package 3 -->
+            <div class="price-card">
+                <div>
+                    <div class="price-tag">&nbsp;</div>
+                    <h3>Complete Menu & Social Master</h3>
+                    <ul class="price-features">
+                        <li>Multi-page Restaurant Menu</li>
+                        <li>Full Month Social Media Grid Kit</li>
+                        <li>High-Resolution Print-Ready Files</li>
+                    </ul>
+                </div>
+                <a href="#contact" class="btn-3d btn-outline">Order Now</a>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#reviews">Reviews</a></li>
-        </ul>
-      </div>
+    <!-- Arrow-Controlled Clean Portfolio Gallery -->
+    <section id="portfolio" class="section">
+        <div class="section-tag">MY PORTFOLIO</div>
+        <h2 class="section-title">Featured Works</h2>
+        <p class="section-desc">Use arrows to browse designs. Click any thumbnail to view in full screen.</p>
 
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="#services">Web Development</a></li>
-          <li><a href="#services">UI/UX Graphic Design</a></li>
-          <li><a href="#services">Digital Marketing</a></li>
-          <li><a href="#services">SEO Optimization</a></li>
-        </ul>
-      </div>
+        <div class="portfolio-wrapper">
+            <button class="arrow-btn left" onclick="scrollPortfolio(-1)">‹</button>
+            <div class="portfolio-scroll-container" id="portfolioContainer">
+                <script>
+                    const totalImages = 45;
+                    const container = document.getElementById('portfolioContainer');
+                    for (let i = 1; i <= totalImages; i++) {
+                        const thumb = document.createElement('div');
+                        thumb.className = 'portfolio-thumb';
+                        thumb.innerHTML = `<img src="image/GD${i}.jpeg" alt="GD${i}" onclick="openLightbox(this.src)">`;
+                        container.appendChild(thumb);
+                    }
+                </script>
+            </div>
+            <button class="arrow-btn right" onclick="scrollPortfolio(1)">›</button>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Popup Image">
     </div>
 
-    <div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-glass); padding-top: 20px;">
-      <p>&copy; 2026 KreativCode Agency. All Rights Reserved.</p>
-    </div>
-  </footer>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-box">
+            <h2>Ready to Elevate Your Food Brand?</h2>
+            <p style="margin-bottom: 30px; color: var(--text-dim);">Let's collaborate to build an unforgettable culinary identity.</p>
+            <a href="mailto:your.email@example.com" class="btn-3d btn-primary">Get a Free Consultation</a>
+        </div>
+    </section>
 
-  <!-- JAVASCRIPT LOGIC -->
-  <script>
-    // Glow Cursor Logic
-    const cursorGlow = document.getElementById('cursorGlow');
-    document.addEventListener('mousemove', (e) => {
-      cursorGlow.style.left = e.clientX + 'px';
-      cursorGlow.style.top = e.clientY + 'px';
-    });
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Muhammad Waleed. All rights reserved.</p>
+        <div class="developer-credit">
+            Developed with ❤️ by <a href="https://www.linkedin.com/in/suleman-ahmed-4a83a8365" target="_blank">Suleman Ahmed</a>
+        </div>
+    </footer>
 
-    // Mobile Navigation Toggle
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('navLinks');
-    hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+    <!-- JavaScript For Arrow Navigation & Lightbox -->
+    <script>
+        function scrollPortfolio(direction) {
+            const container = document.getElementById('portfolioContainer');
+            const scrollAmount = 400; // Left / Right scroll step
+            container.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
 
-    // Close Mobile Nav on Link Click
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => { navLinks.classList.remove('active'); });
-    });
+        function openLightbox(src) {
+            document.getElementById('lightbox').style.display = 'flex';
+            document.getElementById('lightbox-img').src = src;
+        }
 
-    // Switch Portfolio Tabs
-    function switchTab(category) {
-      const webGrid = document.getElementById('web-grid');
-      const graphicGrid = document.getElementById('graphic-grid');
-      const buttons = document.querySelectorAll('.tab-btn');
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
 
-      buttons.forEach(btn => btn.classList.remove('active'));
-
-      if (category === 'web') {
-        webGrid.classList.add('active');
-        graphicGrid.classList.remove('active');
-        buttons[0].classList.add('active');
-      } else {
-        graphicGrid.classList.add('active');
-        webGrid.classList.remove('active');
-        buttons[1].classList.add('active');
-      }
-    }
-
-    // Lightbox Modal Preview
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-
-    function openLightbox(imgSrc) {
-      lightboxImg.src = imgSrc;
-      lightbox.classList.add('active');
-    }
-
-    function closeLightbox() {
-      lightbox.classList.remove('active');
-    }
-
-    // FAQ Accordion Toggle
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-      item.querySelector('.faq-question').addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
-  </script>
 </body>
 </html>
